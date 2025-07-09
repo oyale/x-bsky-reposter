@@ -43,6 +43,30 @@ Concurrent execution of both the client and server is managed through a single c
 - **Post Sync Tracking**: View all posts on Twitter along with their corresponding reposts on BlueSky, highlighting any missing reposts.
 - **Token-based Authentication**: Secure authentication and user session management.
 
+## Configuration
+
+The application supports several configuration options through environment variables:
+
+### Scheduler Configuration
+
+- **`SCHEDULER_CRON`**: Cron expression that defines how often the automatic reposting job runs. 
+  - Default: `"* * * * *"` (every minute)
+  - Example: `"*/5 * * * *"` (every 5 minutes), `"0 * * * *"` (every hour)
+  - Format follows standard cron syntax: `minute hour day month day-of-week`
+
+### Twitter API Configuration
+
+- **`TWITTER_BATCH_SIZE`**: Number of tweets to fetch per request from Twitter API.
+  - Default: `10`
+  - Range: `1-100` (Twitter API limitation)
+  - Higher values reduce API calls but may hit rate limits faster
+
+Example configuration in your `.env` file:
+```sh
+SCHEDULER_CRON="*/5 * * * *"  # Run every 5 minutes
+TWITTER_BATCH_SIZE=25         # Fetch 25 tweets per request
+```
+
 ## Getting started
 
 ### Requirements
