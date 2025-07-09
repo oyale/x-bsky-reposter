@@ -19,7 +19,7 @@ class SchedulerService {
     console.log('Starting automatic Twitter -> BlueSky repost scheduler');
 
     // Schedule job to run every minute
-    this.jobs.autoRepost = cron.schedule('* * * * *', async () => {
+    this.jobs.autoRepost = cron.schedule(process.env.SCHEDULER_CRON || '* * * * *', async () => {
       try {
         console.log('Running auto-repost job: ' + new Date().toISOString());
 
