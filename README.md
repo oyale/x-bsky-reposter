@@ -90,6 +90,35 @@ Concurrent execution of both the client and server is managed through a single c
 5. **Access the application**:
     - Open a web browser and navigate to `http://localhost:5173`.
 
+## Configuration
+
+The application supports additional configuration through environment variables:
+
+### Scheduler Configuration
+
+- **`SCHEDULER_CRON`** (default: `"* * * * *"`): Cron expression that controls how often the automatic repost scheduler runs. The default runs every minute.
+  
+  Examples:
+  - `"*/5 * * * *"` - Run every 5 minutes
+  - `"0 * * * *"` - Run every hour
+  - `"0 0 * * *"` - Run once daily at midnight
+
+### Twitter API Configuration
+
+- **`TWITTER_BATCH_SIZE`** (default: `10`): Number of tweets to fetch from Twitter in each API call. Adjust based on your Twitter API rate limits and processing needs.
+  
+  Examples:
+  - `5` - Fetch 5 tweets per request
+  - `25` - Fetch 25 tweets per request (Note: Twitter API v2 max is typically 100)
+
+These environment variables can be set in your `.env` file in the `server/` directory:
+
+```sh
+# Optional configuration
+SCHEDULER_CRON="*/5 * * * *"
+TWITTER_BATCH_SIZE=15
+```
+
 ### License
 
 The project is open source, licensed under the MIT License.

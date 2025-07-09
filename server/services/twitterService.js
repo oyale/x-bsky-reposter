@@ -150,7 +150,7 @@ class TwitterService {
 
       // Fetch the user's timeline
       const timeline = await userClient.v2.userTimeline(twitterAccountId, {
-        max_results: 10,
+        max_results: parseInt(process.env.TWITTER_BATCH_SIZE, 10) || 10,
         expansions: ['attachments.media_keys'],
         'tweet.fields': ['created_at', 'public_metrics', 'text', 'id'],
         'user.fields': ['profile_image_url', 'name', 'username'],
